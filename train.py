@@ -31,7 +31,7 @@ def train_and_select_model():
     required_coulumns = NUMERIC_FEATURES + CATEGORICAL_FEATURES + [TARGET_COLUMN]
     missing_columns = [col for col in required_coulumns if col not in df.columns]
     if missing_columns:
-        raise ValueError("Missing expected columns in dataset: {missing_columns}")
+        raise ValueError(f"Missing expected columns in dataset: {missing_columns}")
     
     x = df[NUMERIC_FEATURES + CATEGORICAL_FEATURES].copy()
     y = df[TARGET_COLUMN].copy()
@@ -73,13 +73,13 @@ def train_and_select_model():
     joblib.dump(best_pipeline, MODEL_PATH)
 
     payload = {
-        'best_model' = best_model_name,
-        'best_pipeline' = best_pipeline,
-        'results' = results
+        'best_model': best_model_name,
+        'selection_metric': 'f1_score', 
+        'results':results
     }
 
     with open(METRICS_PATH, 'w') as file:
-        json.dump(payload, f, indent = 2)
+        json.dump(payload, file, indent = 2)
 
     with open(FEATURE_COLUMNS_PATH, 'w') as file:
         json.dump({
@@ -91,7 +91,7 @@ def train_and_select_model():
     print(f"Saved pipeline to: {MODEL_PATH}")
     print(f"Saved metrics to: {METRICS_PATH}")
 
-if __name__ == "__main__"
+if __name__ == "__main__":
     train_and_select_model()
 
 
