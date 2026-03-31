@@ -1,6 +1,6 @@
-from sklearn import ColumnTransformer
+from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
-from skelearn.impute import SimpleImputer
+from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 from src.config import NUMERIC_FEATURES, CATEGORICAL_FEATURES

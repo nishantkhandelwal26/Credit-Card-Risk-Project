@@ -14,9 +14,9 @@ def evaluate_model(model, x_test, y_test) -> dict:
 
     metrics = {
         "accuracy": float(accuracy_score(y_test, y_pred)),
-        "precision": float(precision_score(y_test, y_pred)),
-        "recall": float(recall_score(y_test, y_pred)),
-        "f1_score": float(f1_score(y_test, y_pred)),
+        "precision": float(precision_score(y_test, y_pred, pos_label='good')),
+        "recall": float(recall_score(y_test, y_pred, pos_label='good')),
+        "f1_score": float(f1_score(y_test, y_pred, pos_label='good')),
         "roc_auc": float(roc_auc_score(y_test, y_prob)),
         "confusion_matrix": confusion_matrix(y_test, y_pred).tolist(),
         "classification_report": classification_report(y_test, y_pred, output_dict=True)
